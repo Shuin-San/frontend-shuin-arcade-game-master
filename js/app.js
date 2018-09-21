@@ -189,7 +189,7 @@ function reset(){
   player.x = player.startX;
   player.y = player.startY;
   player.score = 0;
-  title[0].innerHTML = `<h3 class="animated fadeIn">Level : ${gameLevel}<br>Lives : ${lifes} <br> Score: ${player.Score} <br> <a href="#" onClick=pause()>Pause game.</a></h3>`;
+  title[0].innerHTML = `<h3 class="animated fadeIn">Level : ${gameLevel}<br>Lives : ${lifes} <br> Score: ${player.score} <br> <a href="#" onClick=pause()>Pause game.</a></h3>`;
 
 }
 
@@ -199,7 +199,7 @@ function win(){
   player.x = player.startX;
   player.y = player.startY;
   player.score = 0;
-  title[0].innerHTML = `<h3 class="animated fadeIn">YOU WON !!! <br> Score: ${player.Score} <br> <a href="#" onClick=reset()>New Game.</a></h3>`;
+  title[0].innerHTML = `<h3 class="animated fadeIn">YOU WON !!! <br> Score: ${player.score} <br> <a href="#" onClick=reset()>New Game.</a></h3>`;
 
 }
 //pause logic

@@ -27,7 +27,7 @@ var Engine = (function(global) {
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
-    title[0].innerHTML = `<h3 class="animated fadeIn">Level : ${gameLevel}<br>Lives : ${lifes} <br> Score: ${player.Score} <br> <a href="#" onClick=reset()>Restart !</a></h3>`;
+    title[0].innerHTML = `<h3 class="animated fadeIn">Level : ${gameLevel}<br>Lives : ${lifes} <br> Score: ${player.score} <br> <a href="#" onClick=reset()>Restart !</a></h3>`;
 
 
     /* This function serves as the kickoff point for the game loop itself
