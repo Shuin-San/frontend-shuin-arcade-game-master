@@ -199,7 +199,7 @@ function win(){
   player.x = player.startX;
   player.y = player.startY;
   player.score = 0;
-  title[0].innerHTML = `<h3 class="animated fadeIn">YOU WON !!! <br> Score: ${player.score} <br> <a href="#" onClick=reset()>New Game.</a></h3>`;
+  title[0].innerHTML = `<h3 class="animated bounce infinite">YOU WON !!! </h3> <br> <br> <h3 class="animated fadeIn"><a href="#" onClick=reset()>New Game.</a></h3>`;
 
 }
 //pause logic
