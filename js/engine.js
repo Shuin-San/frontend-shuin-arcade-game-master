@@ -27,7 +27,7 @@ var Engine = (function(global) {
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
-    title[0].innerHTML = `<h3 class="animated fadeIn">Level : ${gameLevel}<br>Lives : ${lifes} <br> Score: ${player.score} <br> <a href="#" onClick=reset()>Restart !</a></h3>`;
+    player.title[0].innerHTML = `<h3 class="animated fadeIn">Level : ${player.level}<br>Lives : ${player.lifes} <br> Score: ${player.score} <br> <a href="#" onClick=reset()>Restart !</a></h3>`;
 
 
     /* This function serves as the kickoff point for the game loop itself
@@ -42,7 +42,7 @@ var Engine = (function(global) {
          */
 
         //check game status
-        if (status === "ok"){
+        if (player.status === "ok"){
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
@@ -56,8 +56,8 @@ var Engine = (function(global) {
          * for the next time this function is called.
          */
         lastTime = now;
-      } else if (status === "lost"){
-      } else if (status === "paused"){
+      } else if (player.status === "lost"){
+      } else if (player.status === "paused"){
 
       };
         /* Use the browser's requestAnimationFrame function to call this

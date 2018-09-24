@@ -1,14 +1,6 @@
-//Game settings
-var lifes = 5;
-var score = 0;
-var status = "ok";
-var title = document.getElementsByClassName('title');
-
-//Set dificulty level
-var gameLevel = 1;
-
 // Enemies our player must avoid
 var Enemy = function([posXMin,posXMax], [posYMin, posYMax], [speedMin, speedMax]) {
+    // Strict mode on
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -39,7 +31,7 @@ Enemy.prototype.update = function(dt) {
 
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
-    // all computers. increase speed based on gameLevel
+    // all computers. increase speed based on player.level
     for (var enemy in allEnemies){
       this.upOrDownShift = 0;
 
@@ -92,21 +84,25 @@ var Player = function(locX, locY) {
   this.startX = locX;
   this.startY = locY;
   this.score = 0;
+  this.lifes = 5;
+  this.status = "ok";
+  this.title = document.getElementsByClassName('title');
+  this.level = 1;
 };
 
 // Update Player's position
 Player.prototype.update = function(dt) {
   if(this.y < - 10) {
     //if player reaches the goal , level up + score +100
-    gameLevel++;
-    player.score = player.score + 100;
+    this.level++;
+    this.score = this.score + 100;
     this.restart(1);
     // new enemy spawn until enemies count reaches 7
     if (allEnemies.length <= 8){
       allEnemies.push(new Enemy([0, -500],[50, 300], [1, 7]));
     }
     // win prerequisites
-    if (gameLevel === 8){
+    if (player.level === 8){
       win();
     }
   }
@@ -130,16 +126,16 @@ Player.prototype.restart = function(cond) {
   if (cond === 1){
     this.x = 200;
     this.y = 400;
-    title[0].innerHTML = `<h3 class="animated fadeIn">Level : <span class="animated bounce">${gameLevel} </span><br>Lives : ${lifes} <br> Score: ${player.score} <br> <a href="#" onClick=pause()>Pause game</a></h3>`;
+    this.title[0].innerHTML = `<h3 class="animated fadeIn">Level : <span class="animated bounce">${this.level} </span><br>Lives : ${this.lifes} <br> Score: ${this.score} <br> <a href="#" onClick=pause()>Pause game</a></h3>`;
   } else if (cond === 0) {
-    lifes--;
+    this.lifes--;
     this.x = 200;
     this.y = 400;
-    if (lifes === 0){
-      title[0].innerHTML = `<h3 class="animated bounce">You Lost. You reached level ${gameLevel} and your score was ${player.score} <a href="#" onClick=reset()>Restart !</a></h3>`;
-      status = "lost"
+    if (this.lifes === 0){
+      this.title[0].innerHTML = `<h3 class="animated bounce">You Lost. You reached level ${this.level} and your score was ${this.score} <a href="#" onClick=reset()>Restart !</a></h3>`;
+      this.status = "lost"
     } else {
-      title[0].innerHTML = `<h3 class="animated fadeIn">Level : <span class="animated bounce">${gameLevel} </span><br>Lives : ${lifes} <br> Score: ${player.score} <br> <a href="#" onClick=reset()>Restart !</a></h3>`;
+      this.title[0].innerHTML = `<h3 class="animated fadeIn">Level : <span class="animated bounce">${this.level} </span><br>Lives : ${this.lifes} <br> Score: ${this.score} <br> <a href="#" onClick=reset()>Restart !</a></h3>`;
     }
   }
 };
@@ -180,33 +176,33 @@ document.addEventListener('keyup', function(e) {
 
 //reset everything !
 function reset(){
-  status = "ok"
-  lifes = 5;
-  gameLevel = 1;
+  player.status = "ok"
+  player.lifes = 5;
+  player.level = 1;
   for (var i = 0; i <= allEnemies.length; i++){
     allEnemies.pop();
   }
   player.x = player.startX;
   player.y = player.startY;
   player.score = 0;
-  title[0].innerHTML = `<h3 class="animated fadeIn">Level : ${gameLevel}<br>Lives : ${lifes} <br> Score: ${player.score} <br> <a href="#" onClick=pause()>Pause game.</a></h3>`;
+  player.title[0].innerHTML = `<h3 class="animated fadeIn">Level : ${this.level}<br>Lives : ${player.lifes} <br> Score: ${player.score} <br> <a href="#" onClick=pause()>Pause game.</a></h3>`;
 
 }
 
 //win logic
 function win(){
-  status = "Win !"
+  player.status = "Win !"
   player.x = player.startX;
   player.y = player.startY;
   player.score = 0;
-  title[0].innerHTML = `<h3 class="animated bounce infinite">YOU WON !!! </h3> <br> <br> <h3 class="animated fadeIn"><a href="#" onClick=reset()>New Game.</a></h3>`;
+  player.title[0].innerHTML = `<h3 class="animated bounce infinite">YOU WON !!! </h3> <br> <br> <h3 class="animated fadeIn"><a href="#" onClick=reset()>New Game.</a></h3>`;
 
 }
 //pause logic
 function pause(){
-  if (status === "paused") {
-    status = "ok";
+  if (player.status === "paused") {
+    player.status = "ok";
   } else {
-    status = "paused";
+    player.status = "paused";
   }
 }
