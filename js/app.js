@@ -142,7 +142,7 @@ Player.prototype.restart = function(cond) {
 
 Player.prototype.loseALife = function(){
   //how to lose a life
-  player.restart(0);
+  this.restart(0);
   console.log('ouch');
 }
 
