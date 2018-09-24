@@ -179,7 +179,7 @@ function reset(){
   player.status = "ok"
   player.lifes = 5;
   player.level = 1;
-  for (var i = 0; i <= allEnemies.length; i++){
+  for (var i = 0; i <= allEnemies.length + 1; i++){
     allEnemies.pop();
   }
   player.x = player.startX;
